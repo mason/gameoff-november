@@ -5,9 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject fastCritter;
+    
+    private Player player;
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player").GetComponent<Player>();
         Vector2 position = gameObject.transform.position;
         for (int i = 0; i < 5; i++)
         {
@@ -21,6 +24,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        gameObject.transform.position = new Vector3( player.transform.position.x,  player.transform.position.y, -10);
     }
 }

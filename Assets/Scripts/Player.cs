@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCritter : Critter
+public class Player : Critter
 {
     // Start is called before the first frame update
     void Start()
