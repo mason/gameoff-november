@@ -25,18 +25,14 @@ public class FastCritter : Critter
         }
     }
 
-
-    private void OnTriggerStay2D(Collider2D other)
+    protected override void RunAway(Collider2D other)
     {
-        if (!other.CompareTag("FastCritter"))
+        runningAway = true;
+        Critter critter = other.GetComponent<Critter>();
+        if (critter != null)
         {
-            runningAway = true;
-            Critter critter = other.GetComponent<Critter>();
-            if (critter != null)
-            {
-                Rigidbody2D r = other.GetComponent<Rigidbody2D>();
-                rigidbody2D.AddForce(r.position * Random.Range(-2.0f, 4.0f));
-            }
+            Rigidbody2D r = other.GetComponent<Rigidbody2D>();
+            rigidbody2D.AddForce(r.position * Random.Range(-2.0f, 4.0f));
         }
     }
 
