@@ -16,7 +16,7 @@ public abstract class Critter : MonoBehaviour
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        rigidbody2D.drag = 1;
+        rigidbody2D.drag = 0;
     }
 
     // Update is called once per frame

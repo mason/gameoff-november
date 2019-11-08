@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : Critter
 {
+    private bool onRedBloodCell = false;
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
@@ -17,15 +18,38 @@ public class Player : Critter
     {
         
         Vector2 direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        rigidbody2D.AddForce(direction * 2.0f);
-        if (Input.GetKeyDown("e"))
+        rigidbody2D.AddForce(direction * 10.0f);
+        if (onRedBloodCell && Input.GetKeyDown("space"))
         {
-            eatMode = true;
-            spriteRenderer.color = new Color(255,0,0); 
-        } else if (Input.GetKeyUp("e"))
+            spriteRenderer.color = new Color(255,0,0);
+            rigidbody2D.AddForce(Vector2.up * 400);
+        }
+
+        if (onRedBloodCell && Input.GetKeyDown("e"))
         {
-            eatMode = false;
-            spriteRenderer.color = new Color(255,255,255); 
+            Collider2D redBloodCell = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity,
+                LayerMask.GetMask("RedBloodCell")).collider;
+            if (redBloodCell != null)
+            {
+                Destroy(redBloodCell.gameObject);
+            }
+        }
+
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("RedBloodCell"))
+        {
+            onRedBloodCell = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("RedBloodCell"))
+        {
+            onRedBloodCell = false;
         }
     }
 
