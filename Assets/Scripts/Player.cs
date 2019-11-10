@@ -17,8 +17,8 @@ public class Player : Critter
     void FixedUpdate()
     {
         
-        Vector2 direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        rigidbody2D.AddForce(direction * 10.0f);
+        Vector2 direction = new Vector2(Input.GetAxis("Horizontal"), 0);
+        rigidbody2D.AddForce(direction * 15.0f);
         if (onRedBloodCell && Input.GetKeyDown("space"))
         {
             spriteRenderer.color = new Color(255,0,0);
