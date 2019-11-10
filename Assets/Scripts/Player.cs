@@ -2,14 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class Player : Critter
 {
+    protected GameManager gameManager;
+    
     private bool onRedBloodCell = false;
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("Main Camera").GetComponent<GameManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -31,10 +36,12 @@ public class Player : Critter
                 LayerMask.GetMask("RedBloodCell")).collider;
             if (redBloodCell != null)
             {
+                gameManager.incrementScore();
                 Destroy(redBloodCell.gameObject);
             }
         }
 
+        gameManager.scoreText.text = "Score: " + gameManager.score;
     }
 
     private void OnCollisionStay2D(Collision2D other)
