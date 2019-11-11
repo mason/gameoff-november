@@ -25,9 +25,9 @@ public class GameManager : MonoBehaviour
         else if(instance != this)
         {
             Destroy(gameObject);
+            return; // return so we don't call InitGame() again
         }
         DontDestroyOnLoad(gameObject);
-        Debug.Log("awake");
         InitGame(); // RuntimeInitializeOnLoadMethod called after Awake()
     }
     // Start is called before the first frame update
@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static public void CallbackInitialization()
     {
-        Debug.Log("callback");
         //register the callback to be called everytime the scene is loaded
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
