@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     private int score = 0;
     private int numRedBloodCells = 10;
-    private int numWhiteBloodCells = 1;
+    private int numWhiteBloodCells = 5;
     private List<CellPosition>[] availableCells = new List<CellPosition>[10];
     private Player player;
 
@@ -42,7 +44,7 @@ public class GameManager : MonoBehaviour
         // TODO hard coded +=4 meaning the cell is 3 units wide and 1 unit buffer
         for (int row = 0; row < 5; row++)
         {
-            for (int col = 0; col < 5; col++)
+            for (int col = 0; col < 4; col++)
             {
                 if (availableCells[row] == null)
                 {
@@ -50,7 +52,12 @@ public class GameManager : MonoBehaviour
                 }
 
                 List<CellPosition> cells = availableCells[row];
-                CellPosition cp = new CellPosition((row - 3) * 4, (col - 3) * 5);
+                // TODO +3 and +5 are size of red blood cell. remove hard coding
+                int randomRow = ((row * 5) - 10) + Random.Range(-2, 2);
+                int randomCol = ((col * 7) - 10) + Random.Range(-3, 3);
+//                maxRow = maxRow > randomRow ? maxRow : randomRow;
+//                maxCol = maxCol > randomCol ? maxCol : randomCol;
+                CellPosition cp = new CellPosition(randomCol, randomRow);
                 cells.Add(cp);
             }
         }

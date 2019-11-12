@@ -5,14 +5,15 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
-public class Player : Critter
+public class Player : MonoBehaviour
 {
-    
+    protected Rigidbody2D rigidbody2D;
     private bool onRedBloodCell = false;
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
+        rigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -25,9 +26,12 @@ public class Player : Critter
         if (onRedBloodCell && Input.GetKeyDown("space"))
         {
             spriteRenderer.color = new Color(255,0,0);
-            rigidbody2D.AddForce(Vector2.up * 400);
+            rigidbody2D.AddForce(Vector2.up * 600);
         }
+    }
 
+    void Update()
+    {
         if (onRedBloodCell && Input.GetKeyDown("e"))
         {
             Collider2D redBloodCell = Physics2D.Raycast(transform.position, Vector2.down, 10.0f,
@@ -35,15 +39,22 @@ public class Player : Critter
             if (redBloodCell != null)
             {
                 GameManager.instance.incrementScore();
-                Destroy(redBloodCell.gameObject);
+                redBloodCell.gameObject.GetComponent<RedBloodCell>().DestroyObjectDelayed();
                 GameManager.instance.DecrementRedBloodCell();
+                GameManager.instance.scoreText.text = "Score: " + GameManager.instance.Score;
             }
         }
-
-        GameManager.instance.scoreText.text = "Score: " + GameManager.instance.Score;
     }
 
     private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("RedBloodCell"))
+        {
+            onRedBloodCell = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("RedBloodCell"))
         {
@@ -57,16 +68,5 @@ public class Player : Critter
         {
             onRedBloodCell = false;
         }
-    }
-
-    // Do Nothing
-    protected override void Move()
-    {
-        
-    }
-    
-    protected override void RunAway(Collider2D other)
-    {
-        
     }
 }

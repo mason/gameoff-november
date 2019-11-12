@@ -8,11 +8,13 @@ public abstract class Critter : MonoBehaviour
 {
     protected bool eatMode = false;
     protected Rigidbody2D rigidbody2D;
+    
     // Start is called before the first frame update
     public void Start()
     {
         
     }
+    
     void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();

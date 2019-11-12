@@ -11,5 +11,8 @@ public class RedBloodCell : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    
+    public void DestroyObjectDelayed()
+    {
+        Destroy(gameObject, 2);
+    }
 }
