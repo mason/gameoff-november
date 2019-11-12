@@ -9,12 +9,7 @@ public class RedBloodCell : MonoBehaviour
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-//        rigidbody2D.drag = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

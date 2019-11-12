@@ -4,16 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class FastCritter : Critter
+public class WhiteBloodCell : Critter
 {
-    private CircleCollider2D circleCollider2D;
     private bool runningAway = false;
 
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
-        circleCollider2D = GetComponent<CircleCollider2D>();
     }
 
     protected override void Move()

@@ -30,7 +30,7 @@ public class Player : Critter
 
         if (onRedBloodCell && Input.GetKeyDown("e"))
         {
-            Collider2D redBloodCell = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity,
+            Collider2D redBloodCell = Physics2D.Raycast(transform.position, Vector2.down, 10.0f,
                 LayerMask.GetMask("RedBloodCell")).collider;
             if (redBloodCell != null)
             {
@@ -40,7 +40,7 @@ public class Player : Critter
             }
         }
 
-        GameManager.instance.scoreText.text = "Score: " + GameManager.instance.score;
+        GameManager.instance.scoreText.text = "Score: " + GameManager.instance.Score;
     }
 
     private void OnCollisionStay2D(Collision2D other)

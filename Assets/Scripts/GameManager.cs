@@ -11,36 +11,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public GameObject whiteBloodCell;
     public GameObject redBloodCell;
-    public int score = 0;
     public Text scoreText;
-    public int numRedBloodCells = 1;
-    public int numWhiteBloodCells = 1;
 
+    private int score = 0;
+    private int numRedBloodCells = 10;
+    private int numWhiteBloodCells = 1;
     private List<CellPosition>[] availableCells = new List<CellPosition>[10];
     private Player player;
-
-    class CellPosition
-    {
-        private int row;
-        private int col;
-
-        public CellPosition(int row, int col)
-        {
-            this.row = row;
-            this.col = col;
-        }
-
-        public int Row
-        {
-            get => row;
-            set => row = value;
-        }
-        public int Col
-        {
-            get => col;
-            set => col = value;
-        }
-    }
 
     void Awake()
     {
@@ -56,11 +33,6 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         InitGame(); // RuntimeInitializeOnLoadMethod called after Awake()
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
     }
 
     private void PopulateAvailableCellLocations()
@@ -126,16 +98,12 @@ public class GameManager : MonoBehaviour
 
     private void CreateRedBloodCells()
     {
-        int rows = 3;
-        int cols = 5;
-        for (int row = 0; row < rows; row++)
+        for (int i = 0; i < numRedBloodCells; i++)
         {
-            for (int col = 0; col < cols; col++)
-            {
-                CellPosition cp = GetRandomCell(row);
-                Instantiate(redBloodCell, new Vector2(cp.Row,
-                    cp.Col), Quaternion.identity);
-            }
+            // TODO use cols instead of i%3
+            CellPosition cp = GetRandomCell(i % 4);
+            Instantiate(redBloodCell, new Vector2(cp.Row,
+                cp.Col), Quaternion.identity);
         }
     }
 
@@ -143,13 +111,6 @@ public class GameManager : MonoBehaviour
     static private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         instance.InitGame();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-//        gameObject.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
     }
 
     public void DecrementRedBloodCell()
@@ -164,5 +125,33 @@ public class GameManager : MonoBehaviour
     public void incrementScore()
     {
         score++;
+    }
+
+    public int Score
+    {
+        get => score;
+    }
+
+    class CellPosition
+    {
+        private int row;
+        private int col;
+
+        public CellPosition(int row, int col)
+        {
+            this.row = row;
+            this.col = col;
+        }
+
+        public int Row
+        {
+            get => row;
+            set => row = value;
+        }
+        public int Col
+        {
+            get => col;
+            set => col = value;
+        }
     }
 }
