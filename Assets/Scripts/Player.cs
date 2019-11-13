@@ -21,17 +21,26 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         
-        Vector2 direction = new Vector2(Input.GetAxis("Horizontal"), 0);
-        rigidbody2D.AddForce(direction * 15.0f);
+        Vector2 directionX = new Vector2(Input.GetAxis("Horizontal"), 0);
+
+        rigidbody2D.AddForce(directionX * 15.0f);
         if (onRedBloodCell && Input.GetKeyDown("space"))
         {
             spriteRenderer.color = new Color(255,0,0);
             rigidbody2D.AddForce(Vector2.up * 600);
         }
+        
+    }
+    
+    IEnumerator ReEnableBloodCellCollider(float time, GameObject gameObject)
+    {
+        yield return new WaitForSeconds(time);
+        gameObject.GetComponent<Collider2D>().enabled = true;
     }
 
     void Update()
     {
+        Vector2 directionY = new Vector2(0, Input.GetAxis("Vertical"));
         if (onRedBloodCell && Input.GetKeyDown("e"))
         {
             Collider2D redBloodCell = Physics2D.Raycast(transform.position, Vector2.down, 10.0f,
@@ -44,11 +53,22 @@ public class Player : MonoBehaviour
                 GameManager.instance.scoreText.text = "Score: " + GameManager.instance.Score;
             }
         }
+        if (onRedBloodCell && directionY.y < 0)
+        {
+            RaycastHit2D redBloodCell = Physics2D.Raycast(transform.position, Vector2.down, 10.0f,
+                LayerMask.GetMask("RedBloodCell"));
+            if (redBloodCell != null)
+            {
+                redBloodCell.collider.gameObject.GetComponent<Collider2D>().enabled = false;
+                StartCoroutine(ReEnableBloodCellCollider(1.0f, redBloodCell.collider.gameObject));
+            }
+
+        }
     }
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("RedBloodCell"))
+        if (other.gameObject.CompareTag("RedBloodCell") || other.gameObject.CompareTag("WhiteBloodCell"))
         {
             onRedBloodCell = true;
         }
@@ -56,7 +76,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("RedBloodCell"))
+        if (other.gameObject.CompareTag("RedBloodCell") || other.gameObject.CompareTag("WhiteBloodCell"))
         {
             onRedBloodCell = true;
         }
@@ -64,7 +84,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("RedBloodCell"))
+        if (other.gameObject.CompareTag("RedBloodCell") || other.gameObject.CompareTag("WhiteBloodCell"))
         {
             onRedBloodCell = false;
         }
