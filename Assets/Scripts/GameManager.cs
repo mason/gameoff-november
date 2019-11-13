@@ -16,8 +16,9 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
 
     private int score = 0;
+    private int maxRedBloodCells = 10;
     private int numRedBloodCells = 10;
-    private int numWhiteBloodCells = 5;
+    private int numWhiteBloodCells = 7;
     private List<CellPosition>[] availableCells = new List<CellPosition>[10];
     private Player player;
 
@@ -55,8 +56,6 @@ public class GameManager : MonoBehaviour
                 // TODO +3 and +5 are size of red blood cell. remove hard coding
                 int randomRow = ((row * 5) - 10) + Random.Range(-2, 2);
                 int randomCol = ((col * 7) - 10) + Random.Range(-3, 3);
-//                maxRow = maxRow > randomRow ? maxRow : randomRow;
-//                maxCol = maxCol > randomCol ? maxCol : randomCol;
                 CellPosition cp = new CellPosition(randomCol, randomRow);
                 cells.Add(cp);
             }
@@ -80,6 +79,9 @@ public class GameManager : MonoBehaviour
 
     private void InitGame()
     {
+        // Reset variables
+        numRedBloodCells = maxRedBloodCells;
+        
         // UI
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
         scoreText.text = "Score: " + score;
@@ -98,8 +100,8 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < numWhiteBloodCells; i++)
         {
             // position.x+1 since position.x is 0
-            Instantiate(whiteBloodCell, new Vector2((position.x + 1) * Random.Range(-3, 3),
-                (position.y + 1) * Random.Range(-3, 3)), Quaternion.identity);
+            Instantiate(whiteBloodCell, new Vector2(Random.Range(-13, 13), 
+                Random.Range(-10, 10)), Quaternion.identity);
         }
     }
 
@@ -123,15 +125,11 @@ public class GameManager : MonoBehaviour
     public void DecrementRedBloodCell()
     {
         numRedBloodCells--;
-        if (numRedBloodCells <= 0)
+        score++;
+        if (numRedBloodCells < 0) // < 0 because the platform for our player
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-    }
-
-    public void incrementScore()
-    {
-        score++;
     }
 
     public int Score

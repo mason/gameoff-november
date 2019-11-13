@@ -47,10 +47,7 @@ public class Player : MonoBehaviour
                 LayerMask.GetMask("RedBloodCell")).collider;
             if (redBloodCell != null)
             {
-                GameManager.instance.incrementScore();
-                redBloodCell.gameObject.GetComponent<RedBloodCell>().DestroyObjectDelayed();
-                GameManager.instance.DecrementRedBloodCell();
-                GameManager.instance.scoreText.text = "Score: " + GameManager.instance.Score;
+                StartCoroutine(redBloodCell.gameObject.GetComponent<RedBloodCell>().DestroyObjectDelayed());
             }
         }
         if (onRedBloodCell && directionY.y < 0)

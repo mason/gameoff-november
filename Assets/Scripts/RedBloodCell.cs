@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class RedBloodCell : MonoBehaviour
 {
-    private Rigidbody2D rigidbody2D;
-    // Start is called before the first frame update
-    void Start()
+    public IEnumerator DestroyObjectDelayed()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-    }
-
-    public void DestroyObjectDelayed()
-    {
-        Destroy(gameObject, 2);
+        yield return new WaitForSeconds(2);
+        GameManager.instance.DecrementRedBloodCell();
+        GameManager.instance.scoreText.text = "Score: " + GameManager.instance.Score;
+        Destroy(gameObject);
     }
 }
