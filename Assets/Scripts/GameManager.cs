@@ -132,6 +132,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ResetGame()
+    {
+        score = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public int Score
     {
         get => score;

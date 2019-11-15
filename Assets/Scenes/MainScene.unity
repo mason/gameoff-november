@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 486046185}
   - component: {fileID: 486046184}
   - component: {fileID: 486046186}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 813969878}
   - component: {fileID: 813969880}
   - component: {fileID: 813969879}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1803,7 +1803,9 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - m_RefCount: 112
-    m_Data: {r: 1, g: 1, b: 1, a: 1}
+    m_Data: {r: 1, g: 1, b: 1, a: 0}
+  - m_RefCount: 0
+    m_Data: {r: 1, g: 1, b: 1, a: 0.02745098}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -19, y: -11, z: 0}
@@ -1922,7 +1924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 844908762}
   - component: {fileID: 844908761}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}

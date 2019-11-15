@@ -59,7 +59,11 @@ public class Player : MonoBehaviour
                 redBloodCell.collider.gameObject.GetComponent<Collider2D>().enabled = false;
                 StartCoroutine(ReEnableBloodCellCollider(1.0f, redBloodCell.collider.gameObject));
             }
+        }
 
+        if (gameObject.GetComponent<Transform>().position.y < -25)
+        {
+            GameManager.instance.ResetGame();
         }
     }
 
