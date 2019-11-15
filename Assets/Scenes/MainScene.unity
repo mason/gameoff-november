@@ -194,8 +194,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176066465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2, y: -0.5, z: 0}
-  m_LocalScale: {x: 4.03, y: 4.03, z: 4.03}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -473,7 +473,7 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 0.5
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -706,8 +706,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 813969874}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.84, y: -0.56, z: 0}
-  m_LocalScale: {x: 1.1128, y: 1.456114, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 844908762}
   m_RootOrder: 0
@@ -1865,32 +1865,32 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 813969878}
     m_ColliderPaths:
-    - - X: 189175971
-        Y: -160172544
-      - X: 189175971
-        Y: 160172544
-      - X: -211432000
-        Y: 160172515
-      - X: -211431971
-        Y: -160172544
-    - - X: 178048000
-        Y: -145611379
-      - X: -200304000
-        Y: -145611379
-      - X: -200303971
-        Y: 145611408
-      - X: 178048000
-        Y: 145611379
+    - - X: 169999971
+        Y: -165000000
+      - X: 169999971
+        Y: 165000000
+      - X: -190000000
+        Y: 164999971
+      - X: -189999971
+        Y: -165000000
+    - - X: 160000000
+        Y: -149999971
+      - X: -180000000
+        Y: -149999971
+      - X: -179999971
+        Y: 150000000
+      - X: 160000000
+        Y: 149999971
   m_CompositePaths:
     m_Paths:
-    - - {x: 18.917593, y: -16.017254}
-      - {x: 18.917593, y: 16.017254}
-      - {x: -21.1432, y: 16.017248}
-      - {x: -21.143194, y: -16.017254}
-    - - {x: 17.8048, y: -14.561134}
-      - {x: -20.0304, y: -14.561134}
-      - {x: -20.030394, y: 14.561141}
-      - {x: 17.8048, y: 14.561134}
+    - - {x: 16.999994, y: -16.5}
+      - {x: 16.999994, y: 16.5}
+      - {x: -19, y: 16.499994}
+      - {x: -18.999994, y: -16.5}
+    - - {x: 16, y: -14.999993}
+      - {x: -18, y: -14.999993}
+      - {x: -17.999994, y: 15}
+      - {x: 16, y: 14.999993}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.000005
 --- !u!50 &813969880

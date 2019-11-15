@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        InitGame(); // RuntimeInitializeOnLoadMethod called after Awake()
+        //InitGame(); // RuntimeInitializeOnLoadMethod called after Awake()
     }
 
     private void PopulateAvailableCellLocations()
@@ -128,14 +128,14 @@ public class GameManager : MonoBehaviour
         score++;
         if (numRedBloodCells < 0) // < 0 because the platform for our player
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("MainScene");
         }
     }
 
     public void ResetGame()
     {
         score = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("MainScene");
     }
 
     public int Score
