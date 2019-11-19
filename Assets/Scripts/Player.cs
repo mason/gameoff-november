@@ -34,7 +34,11 @@ public class Player : MonoBehaviour
     IEnumerator ReEnableBloodCellCollider(float time, GameObject gameObject)
     {
         yield return new WaitForSeconds(time);
-        gameObject.GetComponent<Collider2D>().enabled = true;
+        // possible object was destroyed prior to jumping down
+        if (gameObject != null)
+        {
+            gameObject.GetComponent<Collider2D>().enabled = true;    
+        }
     }
 
     void Update()
