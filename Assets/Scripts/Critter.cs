@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public abstract class Critter : MonoBehaviour
+public class Critter : MonoBehaviour
 {
-    protected bool eatMode = false;
-    protected Rigidbody2D rigidbody2D;
-    
-    // Start is called before the first frame update
-    public void Start()
-    {
-        
-    }
+    private bool runningTowards = false;
+    private Rigidbody2D rigidbody2D;
     
     void Awake()
     {
@@ -21,31 +13,41 @@ public abstract class Critter : MonoBehaviour
         rigidbody2D.drag = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        Move();
+        Move(); // random movements
     }
-    
-    protected void OnCollisionEnter2D(Collision2D other)
+
+    void Move()
     {
-//        if (eatMode && other.gameObject.GetComponent<Critter>() != null && !other.gameObject.CompareTag(gameObject.tag))
-//        {
-//            // take other critters power
-//            Critter c = other.gameObject.GetComponent<Critter>();
-//            gameObject = Instantiate(c, new Vector2(gameObject.transform.position.x+1 * Random.Range(-3,3), 
-//                gameObject.transform.position.y+1 * Random.Range(-3,3)),  Quaternion.identity);  
-//        }
-    }
-    protected void OnTriggerStay2D(Collider2D other)
-    {
-        if (!other.CompareTag(gameObject.tag))
+        if (!runningTowards)
         {
-            RunAway(other);
+            rigidbody2D.AddForce(new Vector2(rigidbody2D.position.x * Random.Range(-3.0f, 3.0f),
+                rigidbody2D.position.y * Random.Range(-3.0f, 3.0f)));
         }
     }
 
-    protected abstract void Move();
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag(gameObject.tag))
+        {
+            RunTowards(other.gameObject);
+        }
+    }
 
-    protected abstract void RunAway(Collider2D other);
+    void OnTriggerExit2D(Collider2D other)
+    {
+        runningTowards = false;
+    }
+    
+    void RunTowards(GameObject other)
+    {
+        runningTowards = true;
+        Player player = other.GetComponent<Player>();
+        if (player != null)
+        {
+            Rigidbody2D r = other.GetComponent<Rigidbody2D>();
+            rigidbody2D.AddForce(r.position * Random.Range(-1.0f, 2.0f));
+        }
+    }
 }

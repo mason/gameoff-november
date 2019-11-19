@@ -22,11 +22,10 @@ public class Player : MonoBehaviour
     {
         
         Vector2 directionX = new Vector2(Input.GetAxis("Horizontal"), 0);
-
         rigidbody2D.AddForce(directionX * 15.0f);
         if (onRedBloodCell && Input.GetKeyDown("space"))
         {
-            spriteRenderer.color = new Color(255,0,0);
+            //spriteRenderer.color = new Color(255,0,0);
             rigidbody2D.AddForce(Vector2.up * 600);
         }
         

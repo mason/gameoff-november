@@ -24,8 +24,8 @@ public class WhiteBloodCell : MonoBehaviour
     {
         if (!runningTowards)
         {
-            rigidbody2D.AddForce(new Vector2(rigidbody2D.position.x * Random.Range(-3.0f, 3.0f),
-                rigidbody2D.position.y * Random.Range(-3.0f, 3.0f)));
+            rigidbody2D.AddForce(new Vector2(rigidbody2D.position.x * Random.Range(-2.0f, 2.0f),
+                rigidbody2D.position.y * Random.Range(-2.0f, 2.0f)));
         }
     }
 

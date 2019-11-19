@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public GameObject whiteBloodCell;
     public GameObject redBloodCell;
+    public GameObject critter;
     public Text scoreText;
 
     private int score = 0;
