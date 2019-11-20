@@ -10,11 +10,15 @@ public class Player : MonoBehaviour
     protected Rigidbody2D rigidbody2D;
     private bool onRedBloodCell = false;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -69,6 +73,7 @@ public class Player : MonoBehaviour
             GameManager.instance.ResetGame();
         }
     }
+    
 
     private void OnCollisionStay2D(Collision2D other)
     {
@@ -83,6 +88,9 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("RedBloodCell") || other.gameObject.CompareTag("WhiteBloodCell"))
         {
             onRedBloodCell = true;
+        } else if (other.gameObject.CompareTag("WhiteBloodCell"))
+        {
+            //animator.SetBool("Kill", true);
         }
     }
 

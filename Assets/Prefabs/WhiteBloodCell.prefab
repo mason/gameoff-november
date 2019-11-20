@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2517966482259478209}
   - component: {fileID: 2167990936258805072}
   - component: {fileID: -9039031392789650410}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: WhiteBloodCell
   m_TagString: WhiteBloodCell
   m_Icon: {fileID: 0}

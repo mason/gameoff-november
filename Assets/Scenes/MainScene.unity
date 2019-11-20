@@ -452,7 +452,7 @@ MonoBehaviour:
     type: 3}
   redBloodCell: {fileID: 4052234576591364453, guid: f9c8ea9c88f65492ca9645687d61cbc0,
     type: 3}
-  critter: {fileID: 0}
+  critter: {fileID: 3693118113118893014, guid: d87445a0711df49cb9d4e27e88b5163f, type: 3}
   scoreText: {fileID: 1555313697}
 --- !u!20 &519420031
 Camera:

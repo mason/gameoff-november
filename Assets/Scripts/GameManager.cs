@@ -20,8 +20,10 @@ public class GameManager : MonoBehaviour
     private int maxRedBloodCells = 10;
     private int numRedBloodCells = 10;
     private int numWhiteBloodCells = 7;
+    private int numCritters = 7;
     private List<CellPosition>[] availableCells = new List<CellPosition>[10];
     private Player player;
+    private Random rnd = new Random();
 
     void Awake()
     {
@@ -36,7 +38,6 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        //InitGame(); // RuntimeInitializeOnLoadMethod called after Awake()
     }
 
     private void PopulateAvailableCellLocations()
@@ -93,6 +94,31 @@ public class GameManager : MonoBehaviour
         // Red Blood Cells
         PopulateAvailableCellLocations();
         CreateRedBloodCells();
+        
+        // Critters
+        CreateCritters();
+    }
+
+    private void CreateCritters()
+    {
+        Vector2 position = gameObject.transform.position;
+        for (int i = 0; i < numCritters; i++)
+        {
+            IList<int> randomX = new List<int>()
+            {
+                Random.Range(Convert.ToInt32(position.x -3), Convert.ToInt32(position.x -13)),
+                Random.Range(Convert.ToInt32(position.x +3), Convert.ToInt32(position.x +13)),
+            };
+            
+            IList<int> randomY = new List<int>()
+            {
+                Random.Range(Convert.ToInt32(position.y -3), Convert.ToInt32(position.y -13)),
+                Random.Range(Convert.ToInt32(position.y +3), Convert.ToInt32(position.y +13)),
+            };
+            // position.x+1 since position.x is 0
+            Instantiate(critter, new Vector2(randomX[Random.Range(0,1)], 
+                randomY[Random.Range(0,1)]), Quaternion.identity);
+        }
     }
 
     private void CreateWhiteBloodCells()
@@ -100,9 +126,20 @@ public class GameManager : MonoBehaviour
         Vector2 position = gameObject.transform.position;
         for (int i = 0; i < numWhiteBloodCells; i++)
         {
+            IList<int> randomX = new List<int>()
+            {
+                Random.Range(Convert.ToInt32(position.x -3), Convert.ToInt32(position.x -13)),
+                Random.Range(Convert.ToInt32(position.x +3), Convert.ToInt32(position.x +13)),
+            };
+            
+            IList<int> randomY = new List<int>()
+            {
+                Random.Range(Convert.ToInt32(position.y -3), Convert.ToInt32(position.y -13)),
+                Random.Range(Convert.ToInt32(position.y +3), Convert.ToInt32(position.y +13)),
+            };
             // position.x+1 since position.x is 0
-            Instantiate(whiteBloodCell, new Vector2(Random.Range(-13, 13), 
-                Random.Range(-10, 10)), Quaternion.identity);
+            Instantiate(whiteBloodCell, new Vector2(randomX[Random.Range(0,1)], 
+                randomY[Random.Range(0,1)]), Quaternion.identity);
         }
     }
 
