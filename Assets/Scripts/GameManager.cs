@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         // maybe do some calculation on camera width
         // TODO hard coded max rows and cols
         // TODO hard coded +=4 meaning the cell is 3 units wide and 1 unit buffer
-        for (int row = 0; row < 5; row++)
+        for (int row = 0; row < 4; row++)
         {
             for (int col = 0; col < 4; col++)
             {

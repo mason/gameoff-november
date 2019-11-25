@@ -24,15 +24,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
         Vector2 directionX = new Vector2(Input.GetAxis("Horizontal"), 0);
         rigidbody2D.AddForce(directionX * 15.0f);
         if (onRedBloodCell && Input.GetKeyDown("space"))
         {
             //spriteRenderer.color = new Color(255,0,0);
-            rigidbody2D.AddForce(Vector2.up * 600);
+            rigidbody2D.AddForce(Vector2.up * 700);
         }
-        
     }
     
     IEnumerator ReEnableBloodCellCollider(float time, GameObject gameObject)
@@ -77,7 +75,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("RedBloodCell") || other.gameObject.CompareTag("WhiteBloodCell"))
+        if (other.gameObject.CompareTag("RedBloodCell"))
         {
             onRedBloodCell = true;
         }
@@ -85,18 +83,26 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("RedBloodCell") || other.gameObject.CompareTag("WhiteBloodCell"))
+        if (other.gameObject.CompareTag("RedBloodCell"))
         {
             onRedBloodCell = true;
         } else if (other.gameObject.CompareTag("WhiteBloodCell"))
         {
-            //animator.SetBool("Kill", true);
+            StartCoroutine(Kill());
         }
+    }
+    
+    public IEnumerator Kill()
+    {
+        animator.SetBool("Kill", true);
+        yield return new WaitForSeconds(2);
+        GameManager.instance.scoreText.text = "Score: " + GameManager.instance.Score;
+        GameManager.instance.ResetGame();
     }
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("RedBloodCell") || other.gameObject.CompareTag("WhiteBloodCell"))
+        if (other.gameObject.CompareTag("RedBloodCell"))
         {
             onRedBloodCell = false;
         }
